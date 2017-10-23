@@ -1,0 +1,23 @@
+package cn.edu.gdmec.android.mobileguard.m2theftguard;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+import cn.edu.gdmec.android.mobileguard.R;
+
+public class LostFindActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lost_find);
+        startSetUp1Activity();
+    }
+
+    private void startSetUp1Activity(){
+        Intent intent = new Intent(LostFindActivity.this,Setup1Activty.class);
+        startActivity(intent);
+        finish();
+    }
+}
