@@ -28,9 +28,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
     private ContactAdapter adapter;
     private List<ContactInfo> systemContacts;
     Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
+        public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 10:
                     if (systemContacts != null) {
@@ -61,7 +59,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
         mListView = (ListView) findViewById(R.id.lv_contact);
         new Thread() {
             public void run() {
-                systemContacts = ContactInfoParser.getSytemContact(ContactSelectActivity.this);
+                systemContacts = ContactInfoParser.getSystemContact(ContactSelectActivity.this);
                 systemContacts.addAll(ContactInfoParser.getSimContacts(ContactSelectActivity.this));
                 mHandler.sendEmptyMessage(10);
             };

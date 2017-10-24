@@ -16,7 +16,7 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.entity.ContactInfo;
  */
 
 public class ContactInfoParser {
-    public static List<ContactInfo> getSytemContact(Context context) {
+    public static List<ContactInfo> getSystemContact(Context context) {
         ContentResolver resolver = context.getContentResolver();
         Uri uri = Uri.parse("content://com.android.contacts/raw_contacts");
         Uri datauri = Uri.parse("content://com.android.contacts/data");
@@ -31,15 +31,15 @@ public class ContactInfoParser {
                 info.id = id;
 
                 Cursor dataCursor = resolver.query(datauri, new String[]{
-                                "data1", "minetype"}, "raw_contact_id",
+                                "data1", "mimetype"}, "raw_contact_id=?",
                         new String[]{id}, null);
                 while (dataCursor.moveToNext()) {
                     String data1 = dataCursor.getString(0);
                     String mimetype = dataCursor.getString(1);
                     if ("vnd.android.cursor.item/name".equals(mimetype)) {
-                        System.out.println("姓名" + data1);
+                        System.out.println("姓名=" + data1);
                         info.name = data1;
-                    } else if ("vnd.android,cursor.item/phone_v2".equals(mimetype)) {
+                    } else if ("vnd.android.cursor.item/phone_v2".equals(mimetype)) {
                         System.out.println("电话=" + data1);
                         info.phone = data1;
                     }
@@ -63,8 +63,8 @@ public class ContactInfoParser {
             if(mCursor != null){
                 while (mCursor.moveToNext()){
                     ContactInfo info = new ContactInfo();
-                    int nameFileColunIndex = mCursor.getColumnIndex("name");
-                    info.name = mCursor.getString(nameFileColunIndex);
+                    int nameFieldColumnIndex = mCursor.getColumnIndex("name");
+                    info.name = mCursor.getString(nameFieldColumnIndex);
                     int numberFieldColumnIndex = mCursor.getColumnIndex("number");
                     info.phone = mCursor.getString(numberFieldColumnIndex);
                     infos.add(info);

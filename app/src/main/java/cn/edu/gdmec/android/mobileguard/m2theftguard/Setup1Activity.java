@@ -7,20 +7,20 @@ import android.widget.Toast;
 import cn.edu.gdmec.android.mobileguard.R;
 
 /**
- * Created by asus on 2017/10/23.
+ * Created by asus on 2017/10/24.
  */
 
-public class Setup1Activty extends BaseSetupActivity {
+public class Setup1Activity extends BaseSetupActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_1);
-        ((RadioButton) findViewById(R.id.rb_first)).setChecked(true);
+        ((RadioButton)findViewById(R.id.rb_first)).setChecked(true);
     }
 
     @Override
     public void showNext() {
-        startActivitiyAndFinishSelf(Setup2Activity.class);
+        startActivityAndFinishSelf(Setup2Activity.class);
     }
 
     @Override

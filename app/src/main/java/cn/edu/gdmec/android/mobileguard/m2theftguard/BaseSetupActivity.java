@@ -25,7 +25,7 @@ public abstract class BaseSetupActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    public void startActivitiyAndFinishSelf(Class<?> cls){
+    public void startActivityAndFinishSelf(Class<?> cls){
         Intent intent = new Intent(this,cls);
         startActivity(intent);
         finish();

@@ -1,6 +1,7 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard.adapte;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -51,8 +52,11 @@ public class ContactAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder)view.getTag();
         }
+        for (ContactInfo co:contactInfos) {
+            Log.d("tag", "getView: ----name"+contactInfos.get(i).name+"---------phone: "+contactInfos.get(i).phone);
+        }
         holder.mNameTV.setText(contactInfos.get(i).name);
-        holder.mPhoneTV.setText(contactInfos.get(i).name);
+        holder.mPhoneTV.setText(contactInfos.get(i).phone);
         return view;
     }
 

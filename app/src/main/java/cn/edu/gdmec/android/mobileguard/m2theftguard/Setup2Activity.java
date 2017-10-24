@@ -22,9 +22,9 @@ public class Setup2Activity extends BaseSetupActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_2);
-        ((RadioButton) findViewById(R.id.rb_first)).setChecked(true);
+        ((RadioButton) findViewById(R.id.rb_second)).setChecked(true);
 
-        mTelephonyManager = (TelephonyManager) getSystemService(TELECOM_SERVICE);
+        mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         mBindSIMBtn = (Button) findViewById(R.id.btn_bind_sim);
         mBindSIMBtn.setOnClickListener(this);
         if(isBind()){
@@ -47,12 +47,12 @@ public class Setup2Activity extends BaseSetupActivity implements View.OnClickLis
            Toast.makeText(this,"您还没有绑定SIM卡",Toast.LENGTH_LONG).show();
             return;
         }
-        startActivitiyAndFinishSelf(Setup3Activity.class);
+        startActivityAndFinishSelf(Setup3Activity.class);
     }
 
     @Override
     public void showPre() {
-        startActivitiyAndFinishSelf(Setup1Activty.class);
+        startActivityAndFinishSelf(Setup1Activity.class);
     }
 
     @Override
@@ -66,9 +66,9 @@ public class Setup2Activity extends BaseSetupActivity implements View.OnClickLis
 
     private void bindSIM() {
         if(!isBind()){
-            String simeSerinalNumbew = mTelephonyManager.getSimSerialNumber();
+            String simSerialNumber = mTelephonyManager.getSimSerialNumber();
             SharedPreferences.Editor edit = sp.edit();
-            edit.putString("sim",simeSerinalNumbew);
+            edit.putString("sim",simSerialNumber);
             edit.commit();
             Toast.makeText(this,"SIM卡绑定成功！",Toast.LENGTH_LONG).show();
             mBindSIMBtn.setEnabled(false);

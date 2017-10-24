@@ -21,7 +21,8 @@ public class Setup3Activity extends BaseSetupActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_3);
-        ((RadioButton) findViewById(R.id.rb_first)).setChecked(true);
+        ((RadioButton) findViewById(R.id.rb_third)).setChecked(true);
+
         findViewById(R.id.btn_addcontact).setOnClickListener(this);
         mInputPhone = (EditText) findViewById(R.id.et_inputphone);
         String safephone = sp.getString("safephone",null);
@@ -38,14 +39,14 @@ public class Setup3Activity extends BaseSetupActivity implements View.OnClickLis
             return;
         }
         SharedPreferences.Editor edit = sp.edit();
-        edit.putString("safePhone",safePhone);
+        edit.putString("safephone",safePhone);
         edit.commit();
-        startActivitiyAndFinishSelf(Setup4Activity.class);
+        startActivityAndFinishSelf(Setup4Activity.class);
     }
 
     @Override
     public void showPre() {
-        startActivitiyAndFinishSelf(Setup2Activity.class);
+        startActivityAndFinishSelf(Setup2Activity.class);
     }
 
     @Override

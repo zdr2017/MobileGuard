@@ -16,7 +16,7 @@ public class LostFindActivity extends Activity {
     }
 
     private void startSetUp1Activity(){
-        Intent intent = new Intent(LostFindActivity.this,Setup1Activty.class);
+        Intent intent = new Intent(LostFindActivity.this,Setup1Activity.class);
         startActivity(intent);
         finish();
     }

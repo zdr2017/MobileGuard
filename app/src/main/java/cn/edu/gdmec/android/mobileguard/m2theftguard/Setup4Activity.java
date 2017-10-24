@@ -19,11 +19,11 @@ public class Setup4Activity extends BaseSetupActivity {
 
     @Override
     public void showNext() {
-        startActivitiyAndFinishSelf(LostFindActivity.class);
+        startActivityAndFinishSelf(LostFindActivity.class);
     }
 
     @Override
     public void showPre() {
-        startActivitiyAndFinishSelf(Setup3Activity.class);
+        startActivityAndFinishSelf(Setup3Activity.class);
     }
 }
