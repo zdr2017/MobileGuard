@@ -21,7 +21,8 @@
         <TextView
             android:id="@+id/tv_safephone"
             style="@style/textview16sp"
-            android:layout_alignParentLeft="true"
+
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:textColor="@color/purple"/>
@@ -133,7 +134,7 @@
 
         <TextView
             style="@style/textview16sp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:drawablePadding="5dp"
             android:text="#*location*#"
