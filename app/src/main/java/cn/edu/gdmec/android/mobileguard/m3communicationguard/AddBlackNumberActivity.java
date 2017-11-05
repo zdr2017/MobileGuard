@@ -31,7 +31,7 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
         mLeftImgv.setImageResource ( R.drawable.back );
 
         mSmsCB = (CheckBox) findViewById(R.id.cb_blacknumber_sms);
-        mTelCB = (CheckBox) findViewById ( R.id.cb_blacknumber_tel );
+        mTelCB = (CheckBox) findViewById(R.id.cb_blacknumber_tel);
         mNumET = (EditText) findViewById ( R.id.et_balcknumber );
         mNameET = (EditText) findViewById ( R.id.et_blackname );
         findViewById ( R.id.add_blacknum_btn ).setOnClickListener ( this );
@@ -52,7 +52,6 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
         super.onCreate ( savedInstanceState );
         getSupportActionBar ().hide (); //去掉标题栏
         setContentView ( R.layout.activity_add_black_number );
-        //dao = new BlackNumberDao ( AddBlackNumberActivity.this );
         dao = new BlackNumberDao ( AddBlackNumberActivity.this );
         initView ();
     }

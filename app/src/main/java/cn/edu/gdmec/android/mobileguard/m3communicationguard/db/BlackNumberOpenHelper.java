@@ -13,10 +13,11 @@ public class BlackNumberOpenHelper extends SQLiteOpenHelper{
     private static int VERSION = 1;
 
     private static BlackNumberOpenHelper instance = null;
-    public static BlackNumberOpenHelper getInstance(Context context){
-        if(instance==null){
-            instance = new BlackNumberOpenHelper(context,DB_NAME,null,VERSION);
+    public static BlackNumberOpenHelper getInStance(Context context){
+        if (instance==null) {
+            return instance;
         }
+        instance = new BlackNumberOpenHelper(context,DB_NAME,null,VERSION);
         return instance;
     }
 
