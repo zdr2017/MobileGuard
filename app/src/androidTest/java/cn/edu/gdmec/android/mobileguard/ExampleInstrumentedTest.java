@@ -45,6 +45,9 @@ public class ExampleInstrumentedTest {
     private static final int LAUNCH_TIMEOUT = 5000;
     //设备实例
     private UiDevice mDevice;
+    private String str, str1, str2;
+    private UiObject result;
+
     @Before
     public void startMainActivityFromHomeScreen() {
         // 初始化 UiDevice 实例
@@ -72,10 +75,10 @@ public class ExampleInstrumentedTest {
                 LAUNCH_TIMEOUT);
     }
 
-    public boolean waitForUiObject(UiSelector selector,double timeOut) {//等待对象出现
+    public boolean waitForUiObject(UiSelector selector, double timeOut) {//等待对象出现
         Date start = new Date();
         boolean result = false;
-        while(!result){
+        while (!result) {
             try {
                 sleep(200);
             } catch (InterruptedException e) {
@@ -88,57 +91,59 @@ public class ExampleInstrumentedTest {
             }
             Date end = new Date();
             long time = end.getTime() - start.getTime();
-            if (time>timeOut) {
+            if (time > timeOut) {
                 break;
             }
         }
         return result;
     }
+
     //@Test
-    public  void t0SetupPermission() throws UiObjectNotFoundException, InterruptedException {
+    public void t0SetupPermission() throws UiObjectNotFoundException, InterruptedException {
         UiDevice.getInstance().pressHome();
         sleep(200);
         mDevice.findObject(new UiSelector().textStartsWith("设置")).clickAndWaitForNewWindow();
-        mDevice.swipe(700,700,700,0,100);
-        mDevice.swipe(700,700,700,0,100);
+        mDevice.swipe(700, 700, 700, 0, 100);
+        mDevice.swipe(700, 700, 700, 0, 100);
         mDevice.findObject(new UiSelector().textStartsWith("应用")).clickAndWaitForNewWindow();
         mDevice.findObject(new UiSelector().textStartsWith("MobileGuard")).clickAndWaitForNewWindow();
         mDevice.findObject(new UiSelector().textStartsWith("权限")).clickAndWaitForNewWindow();
 
         List<UiObject2> results;
         results = mDevice.findObjects(By.clazz(CheckBox.class));
-        for(UiObject2 item : results){
+        for (UiObject2 item : results) {
             item.click();
         }
         UiDevice.getInstance().pressHome();
 
-//        可listview滚动搜索
-        UiScrollable settingsItem = new UiScrollable(new UiSelector()
-                .className("android.widget.ListView"));
-        UiObject about = settingsItem.getChildByText(new UiSelector()
-                .className("android.widget.LinearLayout"), "About tablet");
-        about.click();
+        //可listview滚动搜索
+//        UiScrollable settingsItem = new UiScrollable(new UiSelector()
+//                .className("android.widget.ListView"));
+//        UiObject about = settingsItem.getChildByText(new UiSelector()
+//                .className("android.widget.LinearLayout"), "About tablet");
+//        about.click();
     }
-    @Test
+
+    //@Test
     public void t01ShowUpdateDialog() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textContains("2.0"));
         String str = null;
         str = result.getText();
-        assertNotNull("检查到新版本",result);
+        assertNotNull("检查到新版本", result);
     }
 
-    @Test
+    //@Test
     public void t02ShowMainActivity() throws UiObjectNotFoundException {
         // 使用UIselector找到包含『版本号』文字的UI组件
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("暂不升级"));
         result.clickAndWaitForNewWindow();
         result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
         String str = result.getText();
-        assertNotNull("出现主界面手机防盗",result);
+        assertNotNull("出现主界面手机防盗", result);
     }
 
-    @Test
-    public void t03SetupPwd() throws Exception{
+    //@Test
+    public void t03SetupPwd() throws Exception {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("暂不升级"));
         result.clickAndWaitForNewWindow();
         result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
@@ -153,8 +158,8 @@ public class ExampleInstrumentedTest {
         result.clickAndWaitForNewWindow();
     }
 
-    @Test
-    public void t04EnterPwd() throws Exception{
+    //@Test
+    public void t04EnterPwd() throws Exception {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("暂不升级"));
         result.clickAndWaitForNewWindow();
         result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
@@ -167,8 +172,8 @@ public class ExampleInstrumentedTest {
         result.clickAndWaitForNewWindow();
     }
 
-    @Test
-    public void t05SetupFling() throws Exception{
+    //@Test
+    public void t05SetupFling() throws Exception {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("暂不升级"));
         result.clickAndWaitForNewWindow();
         result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
@@ -179,18 +184,18 @@ public class ExampleInstrumentedTest {
         pwd1.setText("1");
         result = mDevice.findObject(new UiSelector().textStartsWith("确认"));
         result.clickAndWaitForNewWindow();
-        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.wait(Until.hasObject(By.textStartsWith("选择安全联系人")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
+        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")), LAUNCH_TIMEOUT);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")), LAUNCH_TIMEOUT);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.wait(Until.hasObject(By.textStartsWith("选择安全联系人")), LAUNCH_TIMEOUT);
+        mDevice.swipe(400, 300, 0, 300, 100);
         result = mDevice.findObject(new UiSelector().textStartsWith("恭喜"));
         String str = result.getText();
-        assertNotNull("手机防盗向导",result);
+        assertNotNull("手机防盗向导", result);
     }
 
-    @Test
+    //@Test
     public void t06BindSimNotYet() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("暂不升级"));
         result.clickAndWaitForNewWindow();
@@ -210,17 +215,17 @@ public class ExampleInstrumentedTest {
         pwd.setText("1");
         result = mDevice.findObject(new UiSelector().textStartsWith("确认"));
         result.clickAndWaitForNewWindow();
-        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")),LAUNCH_TIMEOUT);
+        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")), LAUNCH_TIMEOUT);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")), LAUNCH_TIMEOUT);
         result = mDevice.findObject(new UiSelector().textStartsWith("SIM卡绑定"));
         String str = result.getText();
     }
 
-    @Test
+    //@Test
     public void t07BindSimOk() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("暂不升级"));
         result.clickAndWaitForNewWindow();
@@ -232,16 +237,17 @@ public class ExampleInstrumentedTest {
         pwd.setText("1");
         result = mDevice.findObject(new UiSelector().textStartsWith("确认"));
         result.clickAndWaitForNewWindow();
-        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")),LAUNCH_TIMEOUT);
+        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")), LAUNCH_TIMEOUT);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")), LAUNCH_TIMEOUT);
         results = mDevice.findObjects(By.clazz(Button.class));
         UiObject2 btn = results.get(0);
-        assertTrue("bind sim button is enabled",btn.isEnabled());
+        assertTrue("bind sim button is enabled", btn.isEnabled());
         btn.click();
-        assertFalse("bind sim button is not enabled ",btn.isEnabled());
+        assertFalse("bind sim button is not enabled ", btn.isEnabled());
     }
-    @Test
+
+    //@Test
     public void t08SelectSecurityContacts() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("暂不升级"));
         result.clickAndWaitForNewWindow();
@@ -253,19 +259,19 @@ public class ExampleInstrumentedTest {
         pwd.setText("1");
         result = mDevice.findObject(new UiSelector().textStartsWith("确认"));
         result.clickAndWaitForNewWindow();
-        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.wait(Until.hasObject(By.textStartsWith("选择安全联系人")),LAUNCH_TIMEOUT);
+        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")), LAUNCH_TIMEOUT);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")), LAUNCH_TIMEOUT);
+        mDevice.swipe(400, 300, 0, 300, 100);
+        mDevice.wait(Until.hasObject(By.textStartsWith("选择安全联系人")), LAUNCH_TIMEOUT);
         result = mDevice.findObject(new UiSelector().className("android.widget.Button"));
         result.clickAndWaitForNewWindow();
-        UiScrollable contactList = new UiScrollable( new UiSelector().className("android.widget.ListView"));
+        UiScrollable contactList = new UiScrollable(new UiSelector().className("android.widget.ListView"));
         UiObject note = contactList.getChildByText(new UiSelector().className("android.widget.TextView"), "York Cui", true);
         note.clickAndWaitForNewWindow();
         result = mDevice.findObject(new UiSelector().className("android.widget.EditText"));
         String str = result.getText();
-        assertEquals("security contact phonenumber",str,"1 376-079-5885");
+        assertEquals("security contact phonenumber", str, "1 376-079-5885");
     }
 
     @Test
@@ -276,6 +282,7 @@ public class ExampleInstrumentedTest {
         result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
         str = result.getText();
     }
+
     @Test
     public void t10SetupTheftGuard() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
@@ -294,16 +301,16 @@ public class ExampleInstrumentedTest {
         pwd.setText("1");
         result = mDevice.findObject(new UiSelector().textStartsWith("确认"));
         result.clickAndWaitForNewWindow();
-        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
-        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")),LAUNCH_TIMEOUT);
+        mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")), LAUNCH_TIMEOUT);
+        mDevice.swipe(400, 300, 0, 300, 50);
+        mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")), LAUNCH_TIMEOUT);
         results = mDevice.findObjects(By.clazz(Button.class));
         UiObject2 btn = results.get(0);
         btn.click();
-        mDevice.swipe(400,300,0,300,100);
+        mDevice.swipe(400, 300, 0, 300, 50);
         result = mDevice.findObject(new UiSelector().className("android.widget.EditText"));
         result.setText("110");
-        mDevice.swipe(400,300,0,300,100);
+        mDevice.swipe(400, 300, 0, 300, 50);
         result = mDevice.findObject(new UiSelector().textStartsWith("防盗保护已经开启"));
         String str = result.getText();
         result = mDevice.findObject(new UiSelector().className("android.widget.ToggleButton"));
@@ -312,8 +319,9 @@ public class ExampleInstrumentedTest {
         str = result.getText();
         result = mDevice.findObject(new UiSelector().className("android.widget.ToggleButton"));
         result.click();
-        mDevice.swipe(400,300,0,300,100);
+        mDevice.swipe(400, 300, 0, 300, 50);
     }
+
     @Test
     public void t11ReSetupTheftGuard() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
@@ -329,5 +337,4 @@ public class ExampleInstrumentedTest {
         result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗向导"));
         String str = result.getText();
     }
-
 }
