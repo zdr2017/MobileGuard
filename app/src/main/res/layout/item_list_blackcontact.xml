@@ -14,6 +14,13 @@
         android:background="@drawable/brightpurple_contact_icon"/>
 
     <TextView
+        android:id="@+id/tv_black_name"
+        style="@style/textview14sp"
+        android:layout_alignTop="@+id/view_black_ican"
+        android:layout_toRightOf="@+id/view_black_ican"
+        android:textColor="@color/purple"/>
+
+    <TextView
         android:id="@+id/tv_black_mode"
         style="@style/textview14sp"
         android:layout_toRightOf="@+id/view_black_ican"
