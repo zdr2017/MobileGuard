@@ -12,6 +12,7 @@ public class AppInfo {
     public long appSize;
     public boolean isInRoom;
     public boolean isSelected=false;
+
     public String getAppLocation(boolean isInRoom){
         if (isInRoom){
             return "手机内存";
