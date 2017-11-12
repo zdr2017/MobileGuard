@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_LONG).show();
                 mExitTime = System.currentTimeMillis();
             }
-            return true;
+            return true ;
         }
         return super.onKeyDown(keyCode, event);
     }
