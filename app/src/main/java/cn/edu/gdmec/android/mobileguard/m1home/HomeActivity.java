@@ -22,6 +22,8 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.receiver.MyDeviceAdminRecei
 import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.MD5Utils;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.SecurityPhoneActivity;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.AppManagerActivity;
+import cn.edu.gdmec.android.mobileguard.m5virusscan.VirusScanActivity;
+import cn.edu.gdmec.android.mobileguard.m6cleancache.CacheClearListActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
@@ -50,11 +52,17 @@ public class HomeActivity extends AppCompatActivity {
                             showSetUpPswdDialog();
                         }
                         break;
-                    case 1:
+                    case 1://点击通讯卫士
                         startActivity(SecurityPhoneActivity.class);
                         break;
-                    case 2:
+                    case 2://点击软件管家
                         startActivity(AppManagerActivity.class);
+                        break;
+                    case 3://点击手机杀毒
+                        startActivity(VirusScanActivity.class);
+                        break;
+                    case 4:
+                        startActivity(CacheClearListActivity.class);
                         break;
                 }
             }
