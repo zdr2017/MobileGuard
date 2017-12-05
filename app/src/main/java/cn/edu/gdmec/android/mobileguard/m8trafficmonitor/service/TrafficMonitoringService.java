@@ -66,7 +66,7 @@ public class TrafficMonitoringService extends Service {
             mOldRxBytes = mobileRxBytes;
             mOldTxBytes = mobileTxBytes;
             if (newGprs < 0) {
-                // 网络切换过1205
+                // 网络切换过 不是luoruifeng！
                 newGprs = mobileRxBytes + mobileTxBytes;
             }
             if (moblieGPRS == -1) {
