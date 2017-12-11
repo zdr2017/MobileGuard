@@ -52,7 +52,7 @@ public class OperatorSetActivity extends AppCompatActivity implements View.OnCli
                 startActivity(new Intent(this, TrafficMonitoringActivity.class));
                 finish();
                 break;
-            //fni ß
+            //fni ß 12.11
         }
     }
 }
