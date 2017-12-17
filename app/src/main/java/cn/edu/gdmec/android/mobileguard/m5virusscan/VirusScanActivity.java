@@ -97,6 +97,7 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         mLastTimeTV = (TextView) findViewById(R.id.tv_lastscantime);
         myversionTV = (TextView) findViewById(R.id.tv_version);
         findViewById(R.id.rl_allscanvirus).setOnClickListener(this);
+        findViewById(R.id.rl_cloudscanvirus).setOnClickListener(this);
 
     }
 
@@ -150,6 +151,10 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
             case R.id.rl_allscanvirus:
                 startActivity(new Intent(this,VirusScanSpeedActivity.class));
                 break;
+            case R.id.rl_cloudscanvirus:
+                Intent intent = new Intent(this,VirusScanSpeedActivity.class);
+                intent.putExtra("cloud",true);
+                startActivity(intent);
 
         }
     }
