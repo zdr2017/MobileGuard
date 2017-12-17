@@ -58,7 +58,7 @@ public class NumBelongtoActivity extends AppCompatActivity implements View.OnCli
 
         mNumET.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onTextChanged(CharSequence s,int start, int before,int count){}
+            public void onTextChanged(CharSequence s, int start, int before,int count){}
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
