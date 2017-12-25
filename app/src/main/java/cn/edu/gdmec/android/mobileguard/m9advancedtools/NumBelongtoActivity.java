@@ -1,21 +1,21 @@
 package cn.edu.gdmec.android.mobileguard.m9advancedtools;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m9advancedtools.db.dao.NumBelongtoDao;
 
@@ -27,19 +27,11 @@ public class NumBelongtoActivity extends AppCompatActivity implements View.OnCli
     private EditText mNumET;
     private TextView mResultTV;
     private String dbName="address.db";
-    private Handler mHandler=new Handler()
-    {
-        public void handleMessage(android.os.Message msg)
-        {
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_num_belongto);
         initView();
         copyDB(dbName);
@@ -115,7 +107,7 @@ public class NumBelongtoActivity extends AppCompatActivity implements View.OnCli
                     }
                     InputStream is = getAssets().open(dbname);
                     FileOutputStream fos = openFileOutput(dbname, MODE_PRIVATE);
-                    byte[] buffer = new byte[1024];
+                    byte[] buffer=new byte[1024];
                     int len = 0;
                     while ((len = is.read(buffer)) != -1) {
                         fos.write(buffer, 0, len);

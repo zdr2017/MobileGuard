@@ -2,21 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     android:orientation="vertical">
-=======
-    android:orientation="vertical" >
->>>>>>> github/master
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="100"
-<<<<<<< HEAD
         android:orientation="vertical">
-=======
-        android:orientation="vertical"
-        >
->>>>>>> github/master
         <include layout="@layout/titlebar"/>
         <LinearLayout
             style="@style/wrapcontent"
@@ -24,12 +15,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="60dp"
             android:gravity="center"
-<<<<<<< HEAD
             android:orientation="horizontal">
-=======
-            android:orientation="horizontal"
-            >
->>>>>>> github/master
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -38,32 +24,19 @@
                 style="@style/textview16sp"
                 android:layout_marginLeft="15dp"
                 android:lineSpacingMultiplier="1.5"
-<<<<<<< HEAD
-                android:text="仅一次简单设置，以后即可便捷矫正流量，时刻保持与运营商保持精准同步"
+                android:text="仅一次简单设置,以后即可边界矫正流量,时刻保持与运营商保持精准同步."
                 android:textColor="@color/black"
                 android:textScaleX="1.1"
                 />
 
         </LinearLayout>
 
-=======
-                android:text="仅一次简单设置，以后即可便捷矫正流量，时刻保持与运营商保持精准同步。"
-                android:textColor="@color/black"
-                android:textScaleX="1.1"
-                />
-        </LinearLayout>
->>>>>>> github/master
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:gravity="center"
-<<<<<<< HEAD
             android:orientation="horizontal">
-=======
-            android:orientation="horizontal"
-            >
->>>>>>> github/master
             <TextView
                 style="@style/textview16sp"
                 android:text="运营商选择"/>
@@ -74,16 +47,10 @@
                 android:layout_marginLeft="20dp"
                 android:spinnerMode="dropdown"
                 android:background="@drawable/operator_spinner_bg"
-<<<<<<< HEAD
                 android:gravity="center"/>
 
         </LinearLayout>
 
-=======
-                android:gravity="center"
-                />
-        </LinearLayout>
->>>>>>> github/master
     </LinearLayout>
     <Button
         android:id="@+id/btn_operator_finish"
@@ -92,12 +59,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
         android:layout_weight="10"
-<<<<<<< HEAD
         android:background="@drawable/operator_finish_bg_selector"/>
 
 </LinearLayout>
-=======
-        android:background="@drawable/operator_finish_bg_selector"
-        />
-</LinearLayout>
->>>>>>> github/master
