@@ -1,16 +1,11 @@
 package cn.edu.gdmec.android.mobileguard.m1home.entity;
 
-/**
- * Created by asus on 2017/10/22.
- */
-
+//记录版本信息的类
 public class VersionEntity {
-
+    /*服务器版本号*/
     public String versioncode;
-//    服务器版本号
+    /*版本描述*/
     public String description;
-//    版本描述
-    public String apkur1;
-//    下载地址
-
+    /*apk下载地址*/
+    public String apkurl;
 }

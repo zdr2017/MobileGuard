@@ -11,61 +11,63 @@ import android.widget.TextView;
 
 import cn.edu.gdmec.android.mobileguard.R;
 
-/**
- * Created by asus on 2017/10/22.
- */
 
-public class SetUpPasswordDialog extends Dialog implements View.OnClickListener {
+public class SetupPasswordDialog extends Dialog implements View.OnClickListener {
+//    标题栏
     private TextView mTitleTV;
-
+//    首次输入密码文本框
     public EditText mFirstPWDET;
-
+//    确认密码文本框
     public EditText mAffirmET;
-
-    private MyCallBack myCallback;
+//    回调接口
+    private MyCallBack myCallBack;
 
     @Override
-    public void onCreate(Bundle saveInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.setup_password_dialog);
-        super.onCreate(saveInstanceState);
+        super.onCreate(savedInstanceState);
         initView();
     }
-    public SetUpPasswordDialog(@NonNull Context context) {
-        super(context,R.style.dialog_custom);
+
+    public SetupPasswordDialog(@NonNull Context context){
+        super(context, R.style.dialog_custom);
     }
 
-    private void initView(){
+//    初始化控件
+    public void initView(){
         mTitleTV = (TextView) findViewById(R.id.tv_setuppwd_title);
-        mFirstPWDET = (EditText) findViewById(R.id.ed_firstpwd);
+        mFirstPWDET = (EditText) findViewById(R.id.et_firstpwd);
         mAffirmET = (EditText) findViewById(R.id.et_affirm_password);
         findViewById(R.id.btn_ok).setOnClickListener(this);
         findViewById(R.id.btn_cancel).setOnClickListener(this);
     }
 
-    public void setTitle(String title){
-        if (!TextUtils.isEmpty(title)){
+//    设置对话框标题栏
+    public void  setTitle(String title) {
+        if (!TextUtils.isEmpty(title)) {
             mTitleTV.setText(title);
         }
     }
     public void setCallBack(MyCallBack myCallBack){
-        this.myCallback = myCallBack;
+            this.myCallBack = myCallBack;
     }
+
+
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
+    public void onClick(View v) {
+        switch (v.getId()){
             case R.id.btn_ok:
-            System.out.print("SetupPasswordDialog");
-            myCallback.ok();
-            break;
+                System.out.print("SetupPasswordDialog");
+                myCallBack.ok();
+                break;
             case R.id.btn_cancel:
-                myCallback.cancel();
-            break;
+                myCallBack.cancel();
+                break;
         }
     }
+
     public interface MyCallBack{
         void ok();
         void cancel();
     }
 }
-
-

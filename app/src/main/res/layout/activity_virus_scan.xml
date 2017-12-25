@@ -78,12 +78,10 @@
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/rl_cloudscanvirus"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        >
+        android:layout_height="70dp">
         <ImageView
             android:id="@+id/imgv_cloudscan"
             style="@style/wrapcontent"
@@ -106,7 +104,7 @@
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/imgv_cloudscan"
             android:layout_marginTop="10dp"
-            android:text="云查杀,杀毒更全面"
+            android:text="云查杀，杀毒更全面"
             />
         <View
             android:layout_width="13dp"

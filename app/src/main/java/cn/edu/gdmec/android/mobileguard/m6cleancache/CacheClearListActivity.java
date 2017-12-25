@@ -13,7 +13,6 @@ import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,15 +27,13 @@ import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m6cleancache.adapter.CacheCleanAdapter;
 import cn.edu.gdmec.android.mobileguard.m6cleancache.entity.CacheInfo;
 
-/**
- * Created by student on 16/12/19.
- */
-
-public class CacheClearListActivity extends AppCompatActivity implements View.OnClickListener {
-    protected static final int SCANNING = 100;
-    protected static final int FINISH = 101;
+public class CacheClearListActivity extends AppCompatActivity implements View.OnClickListener{
+    private static final int SCANNING = 100;
+    private static final int FINISH = 101;
     private AnimationDrawable animation;
+    /*建议清理*/
     private TextView mRecomandTV;
+    /*可清理*/
     private TextView mCanCleanTV;
     private long cacheMemory;
     private List<CacheInfo> cacheInfos = new ArrayList<CacheInfo>();
@@ -45,39 +42,40 @@ public class CacheClearListActivity extends AppCompatActivity implements View.On
     private CacheCleanAdapter adapter;
     private ListView mCacheLV;
     private Button mCacheBtn;
-    private Handler handler = new Handler() {
+    private Thread thread;
+    private Handler handler = new Handler(){
+        @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
+            switch (msg.what){
                 case SCANNING:
                     PackageInfo info = (PackageInfo) msg.obj;
-                    mRecomandTV.setText("正在扫描:" + info.packageName);
-                    mCanCleanTV.setText("已扫描缓存:" +
-                            Formatter.formatFileSize(CacheClearListActivity.this, cacheMemory));
+                    mRecomandTV.setText("正在扫描："+info.packageName);
+                    mCanCleanTV.setText("已扫描缓存："+ Formatter.formatFileSize(CacheClearListActivity.this,cacheMemory));
+                    //在主线程添加变化后集合
                     mCacheInfos.clear();
                     mCacheInfos.addAll(cacheInfos);
+                    //ListView刷新
                     adapter.notifyDataSetChanged();
                     mCacheLV.setSelection(mCacheInfos.size());
                     break;
                 case FINISH:
+                    //扫描完了 动画停止
                     animation.stop();
-                    if (cacheMemory > 0) {
+                    if (cacheMemory > 0){
                         mCacheBtn.setEnabled(true);
-                    } else {
+                    }else{
                         mCacheBtn.setEnabled(false);
-                        Toast.makeText(CacheClearListActivity.this, "您的手机清洁如新", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CacheClearListActivity.this, "您的手机洁净如新", Toast.LENGTH_LONG).show();
 
                     }
                     break;
             }
+            super.handleMessage(msg);
         }
     };
-    private Thread thread;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_cache_clear_list);
         pm = getPackageManager();
         initView();
@@ -85,10 +83,10 @@ public class CacheClearListActivity extends AppCompatActivity implements View.On
 
     private void initView() {
         findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.rose_red));
-        ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
-        mLeftImgv.setOnClickListener(this);
-        mLeftImgv.setImageResource(R.drawable.back);
-        ((TextView) findViewById(R.id.tv_title)).setText("缓存扫描");
+        ImageView mLeftImagv = (ImageView) findViewById(R.id.imgv_leftbtn);
+        ((TextView)findViewById(R.id.tv_title)).setText("缓存扫描");
+        mLeftImagv.setOnClickListener(this);
+        mLeftImagv.setImageResource(R.drawable.back);
         mRecomandTV = (TextView) findViewById(R.id.tv_recommend_clean);
         mCanCleanTV = (TextView) findViewById(R.id.tv_can_clean);
         mCacheLV = (ListView) findViewById(R.id.lv_scancache);
@@ -97,23 +95,24 @@ public class CacheClearListActivity extends AppCompatActivity implements View.On
         animation = (AnimationDrawable) findViewById(R.id.imgv_broom).getBackground();
         animation.setOneShot(false);
         animation.start();
-        adapter = new CacheCleanAdapter(this, mCacheInfos);
+        adapter = new CacheCleanAdapter(this,mCacheInfos);
         mCacheLV.setAdapter(adapter);
         fillData();
+
 
 
     }
 
     private void fillData() {
-        thread = new Thread() {
+        thread = new Thread(){
+            @Override
             public void run() {
                 cacheInfos.clear();
                 List<PackageInfo> infos = pm.getInstalledPackages(0);
-                for (PackageInfo info : infos) {
+                for (PackageInfo info:infos) {
                     getCacheSize(info);
                     try {
-                        Thread.sleep(500);
-
+                        Thread.sleep(50);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -121,25 +120,39 @@ public class CacheClearListActivity extends AppCompatActivity implements View.On
                     msg.obj = info;
                     msg.what = SCANNING;
                     handler.sendMessage(msg);
-
-
                 }
                 Message msg = Message.obtain();
                 msg.what = FINISH;
                 handler.sendMessage(msg);
-            };
-        };
 
+            }
+        };
         thread.start();
     }
 
-    public void getCacheSize(PackageInfo info) {
+    private void getCacheSize(PackageInfo info) {
         try {
-            Method method = PackageManager.class.getDeclaredMethod
-                    ("getPackageSizeInfo", String.class, IPackageStatsObserver.class);
-            method.invoke(pm, info.packageName, new MyPackObserver(info));
+            Method method = PackageManager.class.getDeclaredMethod("getPackageSizeInfo",String.class, IPackageStatsObserver.class);
+            method.invoke(pm,info.packageName,new MyPackObserver(info));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.imgv_leftbtn:
+                finish();
+                break;
+            case R.id.btn_cleanall:
+                if (cacheMemory > 0){
+                    Intent intent = new Intent(this,CleanCacheActivity.class);
+                    intent.putExtra("cacheMemory",cacheMemory);
+                    startActivity(intent);
+                    finish();
+                }
+                break;
         }
 
     }
@@ -148,68 +161,26 @@ public class CacheClearListActivity extends AppCompatActivity implements View.On
     protected void onDestroy() {
         super.onDestroy();
         animation.stop();
-        if(thread!=null){
-            thread.interrupt();
-        }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.imgv_leftbtn:
-                finish();
-                break;
-            case R.id.btn_cleanall:
-                if(cacheMemory>0){
-                    Intent intent = new Intent(this,CleanCacheActivity.class);
-
-                    intent.putExtra("cacheMemory",cacheMemory);
-                    startActivity(intent);
-                    finish();
-                }
-                break;
-
-        }
-
-    }
     private class MyPackObserver extends android.content.pm.IPackageStatsObserver.Stub{
         private PackageInfo info;
-        public MyPackObserver(PackageInfo info){
-            this.info=info;
+        public MyPackObserver(PackageInfo info) {
+            this.info = info;
         }
 
         @Override
-        public void onGetStatsCompleted(PackageStats pStats, boolean succeeded)
-                throws RemoteException{
-            long cachesize=pStats.cacheSize;
-            if(cachesize>=0){
+        public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) throws RemoteException {
+            long cachesize = pStats.cacheSize;
+            if (cachesize >= 0){
                 CacheInfo cacheInfo = new CacheInfo();
-                cacheInfo.cacheSize=cachesize;
-                cacheInfo.packagename=info.packageName;
-                cacheInfo.appName=info.applicationInfo.loadLabel(pm).toString();
-                cacheInfo.appIcon=info.applicationInfo.loadIcon(pm);
+                cacheInfo.cacheSize = cachesize;
+                cacheInfo.packagename = info.packageName;
+                cacheInfo.appName = info.applicationInfo.loadLabel(pm).toString();
+                cacheInfo.appIcon = info.applicationInfo.loadIcon(pm);
                 cacheInfos.add(cacheInfo);
-                cacheMemory+=cachesize;
+                cacheMemory += cachesize;
             }
         }
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

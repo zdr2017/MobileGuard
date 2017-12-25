@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
     
     <include layout="@layout/titlebar"/>
     
@@ -33,6 +33,6 @@
         style="@style/textview16sp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
-        android:textColor="@color/deep_gray" />
-    
+        android:textColor="@color/deep_gray"/>
+
 </LinearLayout>

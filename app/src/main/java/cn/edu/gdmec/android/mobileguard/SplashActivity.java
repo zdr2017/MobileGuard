@@ -1,4 +1,5 @@
 package cn.edu.gdmec.android.mobileguard;
+
 import android.app.AppOpsManager;
 import android.content.Intent;
 import android.os.Build;
@@ -15,7 +16,7 @@ public class SplashActivity extends AppCompatActivity {
     private String mVersion;
 
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1101;
-    //    private Handler handler;
+//    private Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,9 @@ public class SplashActivity extends AppCompatActivity {
                 versionUpdateUtils.getCloudVersion();
             }
         }.start();
+
+
+
     }
     private boolean hasPermission(){
         AppOpsManager appOps = (AppOpsManager)
