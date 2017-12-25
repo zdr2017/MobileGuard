@@ -18,7 +18,7 @@ public class InterPasswordDialog extends Dialog implements View.OnClickListener 
     private TextView mTitleTV;
     //   输入密码文本框
     public EditText mInterET;
-    //    确认按钮
+    //     确认按钮
     public Button mOKBtn;
     //    取消按钮
     public Button mCancleBtn;
