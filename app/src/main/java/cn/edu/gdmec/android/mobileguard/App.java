@@ -8,13 +8,13 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
-
 /**
  * Created by asus on 2017/10/23.
  */
 
 public class App extends Application {
+    public static final String APPLOCK_ACTION = "cn.edu.gdmec.android.mobileguard.m9advancedtools.applock";
+    public static final String APPLOCK_CONTENT_URI = "content://cn.edu.gdmec.android.mobileguard.m9advancedtools.applock";
     @Override
     public void onCreate(){
         super.onCreate();

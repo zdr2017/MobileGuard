@@ -12,6 +12,12 @@ public class AppInfo {
     public long appSize;
     public boolean isInRoom;
     public boolean isSelected=false;
+    public String versionName;
+    public long firstInstallTime;
+    public String signature;
+    public String requestedPermissions;
+    public String activities;
+
 
     public String getAppLocation(boolean isInRoom){
         if (isInRoom){
@@ -20,5 +26,6 @@ public class AppInfo {
             return "外部存储";
         }
     }
+    public boolean isLock;
 }
 
